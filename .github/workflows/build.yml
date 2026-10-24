@@ -23,7 +23,7 @@ jobs:
       - name: Build with Gradle
         run: |
           if [ ! -f gradlew ]; then
-            gradle wrapper --gradle-version 9.2
+            gradle wrapper --gradle-version 9.8.2
           fi
           chmod +x gradlew
           ./gradlew build --no-daemon --stacktrace
