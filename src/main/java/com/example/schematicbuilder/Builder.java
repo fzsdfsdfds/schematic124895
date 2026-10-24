@@ -464,16 +464,10 @@ public class Builder {
         player.setXRot(Math.max(-45f, Math.min(45f, pitch)));
         player.connection.send(new ServerboundMovePlayerPacket.Rot(yaw, player.getXRot(), player.onGround(), player.horizontalCollision));
 
-        // idź do przodu (zza = forward impulse w układzie gracza)
+        // idź w stronę bloku (zza = forwardSpeed w LivingEntity)
         player.zza = 1.0f;
         player.xxa = 0.0f;
-        if (player.input != null) {
-            try {
-                player.input.forwardImpulse = 1.0f;
-                player.input.leftImpulse = 0.0f;
-            } catch (Throwable ignored) {
-            }
-        }
+
         // proste unikanie przeszkód: skok gdy blok przed nogami
         BlockPos ahead = player.blockPosition().relative(player.getDirection());
         BlockState feet = level.getBlockState(ahead);
