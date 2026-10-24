@@ -22,15 +22,15 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          # Fabric Loom potrzebuje wrappera – generujemy go jeśli go nie ma
           if [ ! -f gradlew ]; then
-            gradle wrapper --gradle-version 8.12
+            gradle wrapper --gradle-version 9.2
           fi
           chmod +x gradlew
-          ./gradlew build --no-daemon
+          ./gradlew build --no-daemon --stacktrace
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: schematic-builder
           path: build/libs/*.jar
+          if-no-files-found: error
