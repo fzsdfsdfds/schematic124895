@@ -1,5 +1,6 @@
 plugins {
-    id("fabric-loom") version "1.14-SNAPSHOT"
+    id("fabric-loom") version "1.18-SNAPSHOT"
+    id("maven-publish")
 }
 
 val minecraftVersion = providers.gradleProperty("minecraft_version").get()
@@ -12,6 +13,9 @@ base {
     group = providers.gradleProperty("maven_group").get()
 }
 
+repositories {
+}
+
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
     mappings(loom.officialMojangMappings())
@@ -20,9 +24,9 @@ dependencies {
 }
 
 java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
 }
 
 tasks {
